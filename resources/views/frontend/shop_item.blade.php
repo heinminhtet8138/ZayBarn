@@ -9,7 +9,7 @@
                         <div class="small mb-1">CODENO: {{$product->code_no}}</div>
                         <h1 class="display-5 fw-bolder">{{$product->name}}</h1>
                         <div class="fs-5 mb-5">
-                        <span class="badge text-bg-primary">{{$product->category_id}}</span>
+                        <a href="{{route('products.category',$product->category_id)}}" class="badge text-bg-primary text-decoration-none">{{$product->category->name}}</a>
                         <br>
                             <!-- <span class="text-decoration-line-through">$45.00</span> -->
                             @if($product->discount == 0)

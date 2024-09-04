@@ -33,4 +33,12 @@ class OrderController extends Controller
 
         return view('admin.orders.index',compact('orderList'));
     }
+
+    public function orderDetail($voucher_no)
+    {
+        // echo $voucher_no;
+        $orders = Order::where('voucher_no',$voucher_no)->get();
+        // dd($orders);
+        return view('admin.orders.detail',compact('orders'));
+    }
 }

@@ -23,22 +23,28 @@
         </div>
 
         <div class="d-grid gap-2">
-            <form id="paymentForm" class="row" enctype="multipart/form-data">
-                <div class="col-md-6">
-                    <label for="payment_slip" class="form-label">Payment Slip</label>
-                    <input type="file" accept="image/*" class="form-control" name="payment_slip" id="payment_slip">
-                </div>
-                <div class="col-md-6">
-                    <label for="paymentMethod" class="form-label">Payment Method</label>
-                    <select name="payment_id" id="paymentMethod" class="form-select">
-                        <option value="">Choose Payment Method</option>
-                        @foreach($payments as $payment)
-                            <option value="{{$payment->id}}">{{$payment->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary my-5" id="orderNow">Order Now</button>
-            </form>
+            @if(Auth::user() && Auth::user()->role == 'User')
+                <form id="paymentForm" class="row" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                        <label for="payment_slip" class="form-label">Payment Slip</label>
+                        <input type="file" accept="image/*" class="form-control" name="payment_slip" id="payment_slip">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="paymentMethod" class="form-label">Payment Method</label>
+                        <select name="payment_id" id="paymentMethod" class="form-select">
+                            <option value="">Choose Payment Method</option>
+                            @foreach($payments as $payment)
+                                <option value="{{$payment->id}}">{{$payment->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary my-5" id="orderNow">Order Now</button>
+                </form>
+            @elseif(Auth::user() && Auth::user()->role = 'Admin')
+                <p class="text-center text-danger">Admin not order.</p>
+            @else 
+                <a href="/login" class="btn btn-primary">Login to order.</a>
+            @endif
         </div>
 
     </section>

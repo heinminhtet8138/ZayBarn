@@ -27,11 +27,11 @@
                         @foreach($orderList as $order)
                             <tr>
                                 <td>{{$order->voucher_no}}</td>
-                                <td>{{$order->user_id}}</td>
+                                <td>{{$order->user->name}}</td>
                                 <td>{{$order->status}}</td>
-                                <td>{{$order->payment_id}}</td>
+                                <td>{{$order->payment->name}}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-primary">View Detail</a>
+                                    <a href="{{route('backend.orders.detail',$order->voucher_no)}}" class="btn btn-sm btn-primary">View Detail</a>
                                 </td>
                             </tr>
                         @endforeach

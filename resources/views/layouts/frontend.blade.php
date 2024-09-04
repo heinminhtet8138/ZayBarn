@@ -45,8 +45,24 @@
                             <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_item">0</span>
                         </a>
                     </form>
-                    <a href="/login" class="btn mx-3">Login</a>
-                    <a href="/register" class="btn btn-outline-primary">Register</a>
+                    @guest
+                        <a href="/login" class="btn mx-3">Login</a>
+                        <a href="/register" class="btn btn-outline-primary">Register</a>
+                    @else 
+                    <div class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{Auth::user()->name}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf 
+                                    <button type="submit" class="btn">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    @endguest
                 </div>
             </div>
         </nav>

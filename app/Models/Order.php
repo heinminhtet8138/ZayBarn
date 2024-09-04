@@ -20,4 +20,15 @@ class Order extends Model
         'user_id',
         'status'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(\App\Models\Payment::class);
+    }
+
 }

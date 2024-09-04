@@ -13,12 +13,13 @@ Route::get('checkout',[App\Http\Controllers\FrontendController::class,'checkOut'
 Route::post('order_now',[App\Http\Controllers\FrontendController::class, 'orderNow'])->name('frontend.orderNow');
 Route::get('products/category/{id}',[App\Http\Controllers\FrontendController::class, 'productCategory'])->name('products.category');
 
-Route::group(['prefix'=>'backend', 'as'=>'backend.'],function(){
+Route::group(['middleware'=>['auth'], 'prefix'=>'backend', 'as'=>'backend.'],function(){
     Route::get('/',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::resource('products',App\Http\Controllers\Admin\ProductController::class);
     Route::get('orders',[App\Http\Controllers\Admin\OrderController::class,'index'])->name('order.index');
     Route::get('orders/accept',[App\Http\Controllers\Admin\OrderController::class, 'orderAccept'])->name('orders.accept');
     Route::get('orders/complete',[App\Http\Controllers\Admin\OrderController::class, 'orderComplete'])->name('orders.complete');
+    Route::get('orders/detail/{voucher_no}',[App\Http\Controllers\Admin\OrderController::class, 'orderDetail'])->name('orders.detail');
 
 });
 
